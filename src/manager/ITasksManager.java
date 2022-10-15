@@ -11,13 +11,11 @@ import java.util.Set;
 
 public interface ITasksManager {
 
-    public ArrayList<Task> getTasks();
+    public List<Task> getTasks();
 
-    public ArrayList<Subtask> getSubtasks();
+    public List<Subtask> getSubtasks();
 
-    public ArrayList<Epic> getEpics();
-
-    //public ArrayList<Subtask> getEpicSubtasks(int epicId);
+    public List<Epic> getEpics();
 
     Task getTask(int id);
 
@@ -41,17 +39,10 @@ public interface ITasksManager {
 
     void updateSubtask(Subtask subtask);
 
-    void deleteTask(int id); /* {
-        Task task = tasks.remove(id);
-    } */
+    void deleteTask(int id);
 
     void deleteEpic(int id);
 
-    /*{
-        Epic epic = epics.remove(id);
-        // если удаляется эпик удаляется и сабтаск
-
-    }*/
     void deleteSubtask(int id);
 
 }

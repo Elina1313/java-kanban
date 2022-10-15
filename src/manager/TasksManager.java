@@ -15,27 +15,27 @@ public class TasksManager implements ITasksManager {
     private int generatorId = 0;
 
     @Override
-    public ArrayList<Task> getTasks() {
-        ArrayList<Task> taskArrayList = new ArrayList<>(tasks.values());
+    public List<Task> getTasks() {
+        List<Task> taskArrayList = new ArrayList<>(tasks.values());
         return taskArrayList;
     }
 
     @Override
-    public ArrayList<Subtask> getSubtasks() {
-        ArrayList<Subtask> subtaskArrayList = new ArrayList<>(subtasks.values());
+    public List<Subtask> getSubtasks() {
+        List<Subtask> subtaskArrayList = new ArrayList<>(subtasks.values());
         return subtaskArrayList;
     }
 
     @Override
-    public ArrayList<Epic> getEpics() {
-        ArrayList<Epic> epicArrayList = new ArrayList<>(epics.values());
+    public List<Epic> getEpics() {
+        List<Epic> epicArrayList = new ArrayList<>(epics.values());
         return epicArrayList;
     }
 
     @Override
     public List<Subtask> getEpicSubtasks(int epicId) {
-        ArrayList<Integer> subtaskIds = new ArrayList<>(getEpic(epicId).getSubtasksIds());
-        ArrayList<Subtask> epicSubtask = new ArrayList<>();
+        List<Integer> subtaskIds = new ArrayList<>(getEpic(epicId).getSubtasksIds());
+        List<Subtask> epicSubtask = new ArrayList<>();
         for (Integer id : subtaskIds) {
             epicSubtask.add(getSubtask(id));
         }
@@ -60,17 +60,28 @@ public class TasksManager implements ITasksManager {
 
     @Override
     public void deleteTask(int id) {
-
+        tasks.remove(id);
     }
 
     @Override
     public void deleteEpic(int id) {
 
+        for (int idValue : getEpic(id).getSubtasksIds()) {
+            subtasks.remove(id);
+        }
+        epics.remove(id);
     }
 
     @Override
     public void deleteSubtask(int id) {
-
+        Subtask subtask = getSubtask(id);
+        if (subtask == null) {
+            System.out.println("Ошибка удаления. Подзадачи с id" + id + "не существует.");
+        } else {
+            Epic epic = getEpic(subtask.getEpicId());
+            subtasks.remove(id);
+            subtasks.remove(id);
+        }
     }
 
     @Override
