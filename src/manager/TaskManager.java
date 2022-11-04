@@ -4,12 +4,9 @@ import tasks.Epic;
 import tasks.Subtask;
 import tasks.Task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
-public interface ITasksManager {
+public interface TaskManager {
 
     public List<Task> getTasks();
 
@@ -44,5 +41,7 @@ public interface ITasksManager {
     void deleteEpic(int id);
 
     void deleteSubtask(int id);
+
+    List<Task> getHistory();
 
 }
