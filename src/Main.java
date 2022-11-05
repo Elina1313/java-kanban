@@ -30,11 +30,11 @@ public class Main {
         System.out.println(manager.getEpics());
         System.out.println();
 
-        manager.updateTask(taskFirst = new Task(taskFirst.getId(), "taskFirst", "desFirst", TaskStatus.IN_PROGRESS));
-        manager.updateTask(taskSecond = new Task(taskSecond.getId(), "taskSecond", "desSecond", TaskStatus.DONE));
+        manager.updateTask(new Task(taskFirst.getId(), "taskFirst", "desFirst", TaskStatus.IN_PROGRESS));
+        manager.updateTask(new Task(taskSecond.getId(), "taskSecond", "desSecond", TaskStatus.DONE));
         manager.updateSubtask(subtaskFirst = new Subtask(subtaskFirst.getId(), "subtaskFirst", "desFirst", TaskStatus.IN_PROGRESS, epicIdFirst));
-        manager.updateSubtask(subtaskSecond = new Subtask(subtaskSecond.getId(), "subtaskSecond", "desSecond", TaskStatus.DONE, epicIdFirst));
-        manager.updateSubtask(subtaskFirst = new Subtask(subtaskFirst.getId(), "subtaskFirst", "desFirst", TaskStatus.DONE, epicIdSecond));
+        manager.updateSubtask(new Subtask(subtaskSecond.getId(), "subtaskSecond", "desSecond", TaskStatus.DONE, epicIdFirst));
+        manager.updateSubtask(new Subtask(subtaskFirst.getId(), "subtaskFirst", "desFirst", TaskStatus.DONE, epicIdSecond));
         System.out.println(manager.getTasks());
         System.out.println(manager.getSubtasks());
         System.out.println(manager.getEpics());
