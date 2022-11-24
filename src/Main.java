@@ -4,49 +4,41 @@ import tasks.Subtask;
 import tasks.Task;
 import tasks.TaskStatus;
 
+import java.util.List;
+
 public class Main {
 
-    public static void main(String[] args) {
-        TaskManager manager = Managers.getDefault();
+    public static void maind(String[] args) {
+        TaskManager manager = Managers.getInMemoryTaskManager(Managers.getDefaultHistory());
 
-        Task taskFirst = new Task("taskFirst", "desFirst", TaskStatus.NEW);
-        Task taskSecond = new Task("taskSecond", "desSecond", TaskStatus.NEW);
-        final int taskIdFirst = manager.addNewTask(taskFirst);
-        final int taskIdSecond = manager.addNewTask(taskSecond);
+        manager.addNewTask(new Task("taskFirst", "desFirst", TaskStatus.NEW));
+        manager.addNewTask(new Task("taskSecond", "desSecond", TaskStatus.NEW));
+        manager.addNewEpic(new Epic("epicFirst", "desFirst", TaskStatus.NEW));
+        manager.addNewEpic(new Epic("epicSecond", "desFirst", TaskStatus.NEW));
+        manager.addNewSubtask(new Subtask("subtaskFirst", "desFirst", TaskStatus.NEW, 3));
+        manager.addNewSubtask(new Subtask("subtaskSecond", "desSecond", TaskStatus.NEW, 3));
+        manager.addNewSubtask(new Subtask("subtaskThird", "desThird", TaskStatus.NEW, 3));
 
-        Epic epicFirst = new Epic("epicFirst", "desFirst", TaskStatus.NEW);
-        Epic epicSecond = new Epic("epicSecond", "desSecond", TaskStatus.NEW);
-        final int epicIdFirst = manager.addNewEpic(epicFirst);
-        final int epicIdSecond = manager.addNewEpic(epicSecond);
+        manager.getTask(1);
+        manager.getEpic(3);
+        manager.getEpic(3);
+        manager.getEpic(3);
+        manager.getTask(1);
+        manager.getEpic(4);
+        manager.getSubtask(5);
+        manager.getSubtask(5);
+        manager.getSubtask(6);
 
-        Subtask subtaskFirst = new Subtask("subtaskFirst", "desFirst", TaskStatus.NEW, epicIdFirst);
-        Subtask subtaskSecond = new Subtask("subtaskSecond", "desSecond", TaskStatus.NEW, epicIdFirst);
-        Subtask subtaskThird = new Subtask("subtaskThird", "desThird", TaskStatus.NEW, epicIdSecond);
-        final int subtaskIdFirst = manager.addNewTask(subtaskFirst);
-        final int subtaskIdSecond = manager.addNewTask(subtaskSecond);
-        final int subtaskIdThird = manager.addNewTask(subtaskThird);
-        System.out.println(manager.getTasks());
-        System.out.println(manager.getSubtasks());
-        System.out.println(manager.getEpics());
-        System.out.println();
+        System.out.println("Get History");
+        List<Task> history = manager.getHistory();
+        System.out.println(history);
 
-        manager.updateTask(new Task(taskFirst.getId(), "taskFirst", "desFirst", TaskStatus.IN_PROGRESS));
-        manager.updateTask(new Task(taskSecond.getId(), "taskSecond", "desSecond", TaskStatus.DONE));
-        manager.updateSubtask(subtaskFirst = new Subtask(subtaskFirst.getId(), "subtaskFirst", "desFirst", TaskStatus.IN_PROGRESS, epicIdFirst));
-        manager.updateSubtask(new Subtask(subtaskSecond.getId(), "subtaskSecond", "desSecond", TaskStatus.DONE, epicIdFirst));
-        manager.updateSubtask(new Subtask(subtaskFirst.getId(), "subtaskFirst", "desFirst", TaskStatus.DONE, epicIdSecond));
-        System.out.println(manager.getTasks());
-        System.out.println(manager.getSubtasks());
-        System.out.println(manager.getEpics());
-        System.out.println();
+        manager.remove(1);
+        manager.deleteEpic(3);
 
-        System.out.println(manager.getTask(taskIdFirst));
-        System.out.println(manager.getTask(taskIdSecond));
-        System.out.println(manager.getSubtask(subtaskIdFirst));
-        System.out.println(manager.getSubtask(subtaskIdSecond));
-        System.out.println(manager.getEpic(epicIdFirst));
-        System.out.println(manager.getEpic(epicIdSecond));
-        System.out.println(manager.getHistory());
+        System.out.println("Get History after remove");
+        List<Task> historyAfterRemove = manager.getHistory();
+        System.out.println(historyAfterRemove);
 
     }
 }
