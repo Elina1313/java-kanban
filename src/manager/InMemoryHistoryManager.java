@@ -8,7 +8,7 @@ import java.util.*;
 public class InMemoryHistoryManager implements HistoryManager {
 
     private static class CustomLinkedList {
-        private final HashMap<Integer, Node> nodeMap = new HashMap<>();
+        private final Map<Integer, Node> nodeMap = new HashMap<>();
         private final Map<Integer, Node> nodeHashMap = new HashMap<>();
         private Node head;
         private Node tail;
