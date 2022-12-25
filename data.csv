@@ -1,10 +1,10 @@
-id,type,name,status,description,epic
-1,TASK,taskFirst,NEW,desFirst,
-2,TASK,taskSecond,NEW,desSecond,
-3,EPIC,epicFirst,NEW,desFirst,
-4,EPIC,epicSecond,NEW,desSecond,
-5,SUBTASK,subtaskFirst,NEW,desFirst,3
-6,SUBTASK,subtaskSecond,NEW,desSecond,3
-7,SUBTASK,subtaskThird,NEW,desThird,3
+1,TASK,Update desTask1,IN_PROGRESS,Update TaskName1,
+2,TASK,DesTask2,NEW,Name Task2,
+3,TASK,DesTask3,NEW,Name Task3,
+4,EPIC,DesEpic1,NEW,Name Epic1,
+5,EPIC,DesEpic2,NEW,Name Epic2,
+6,SUBTASK,Des Subtask1,NEW,Name Subtask1,4
+7,SUBTASK,Des Subtask2,NEW,Name Subtask2,4
+8,SUBTASK,Des Subtask3,NEW,Name Subtask3,4
 
-1,3,4,5,6
+4

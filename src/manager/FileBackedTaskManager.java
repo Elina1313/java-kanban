@@ -1,13 +1,14 @@
 package manager;
 
+import TaskType.TaskType;
 import tasks.Epic;
 import tasks.Subtask;
 import tasks.Task;
-import tasks.TaskStatus;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+import static manager.CSVTaskFormat.getType;
 import static manager.CSVTaskFormat.historyFromString;
 
 
@@ -27,20 +28,31 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         this.file = file;
     }
 
-    public void loadFromFile() {
+    public void loadFromFile(File file) {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
-            String line = bufferedReader.readLine();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(this.file, StandardCharsets.UTF_8))) {
+            //String line = bufferedReader.readLine();
             while (bufferedReader.ready()) {
-                line = bufferedReader.readLine();
+                String line = bufferedReader.readLine();
                 if (line.equals("")) {
                     break;
                 }
-                String lineWithHistory = bufferedReader.readLine();
-                for (int id : historyFromString(lineWithHistory)) {
-                    addToHistory(id);
+                Task task = CSVTaskFormat.taskFromString(line);
+
+                if (getType(task) == TaskType.EPIC) {
+                    createEpic((Epic) task);
+                } else if (getType(task) == TaskType.SUBTASK) {
+                    createSubtask((Subtask) task);
+                } else {
+                    createTask(task);
                 }
             }
+
+            String lineWithHistory = bufferedReader.readLine();
+            for (int id : historyFromString(lineWithHistory)) {
+                addToHistory(id);
+            }
+
         } catch (IOException e) {
             throw new ManagerSaveException("Не удалось считать данные из файла.");
         }
@@ -49,7 +61,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     public void save() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8))) {
-            bufferedWriter.write("id,type,name,status,description,epic" + "\n");
+            //bufferedWriter.write("id,type,name,status,description,epic" + "\n");
             for (Task task : getTasks()) {
                 bufferedWriter.write(CSVTaskFormat.toString(task) + "\n");
             }
@@ -154,6 +166,18 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     public void updateEpic(Epic epic) {
         super.updateEpic(epic);
         save();
+    }
+
+    public void createTask(Task task) {
+        super.addNewTask(task);
+    }
+
+    public void createEpic(Epic epic) {
+        super.addNewEpic(epic);
+    }
+
+    public void createSubtask(Subtask subtask) {
+        super.addNewSubtask(subtask);
     }
 
 }
