@@ -1,11 +1,12 @@
 package tasks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.Instant;
+
+import java.util.*;
 
 public class Epic extends Task {
     private final List<Integer> subtasksIds = new ArrayList<>();
+    private Instant endTime;
 
     public Epic(int id, String name, String description, TaskStatus status) {
 
@@ -15,6 +16,12 @@ public class Epic extends Task {
     public Epic(String name, String description, TaskStatus status) {
 
         super(name, description, status);
+    }
+
+    public Epic(String name, String description, TaskStatus status, Instant startTime, long duration) {
+
+        super(name, description, status, startTime, duration);
+        this.endTime = super.getEndTime();
     }
 
     public boolean booleanisEpic() {
@@ -32,10 +39,15 @@ public class Epic extends Task {
         return subtasksIds;
     }
 
-    public void addIdSubtasks(int id) {
+    /*public void addIdSubtasks(int id) {
 
         subtasksIds.add(id);
+    }*/
+
+    public void setSubtaskIds(int id) {
+        subtasksIds.add(id);
     }
+
 
     public void cleanSubtaskIds() {
 
@@ -47,6 +59,14 @@ public class Epic extends Task {
         subtasksIds.remove(Integer.valueOf(id));
     }
 
+    @Override
+    public Instant getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Instant endTime) {
+        this.endTime = endTime;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -67,10 +87,13 @@ public class Epic extends Task {
     public String toString() {
         return "Epic{" +
                 "subtasksIds=" + subtasksIds +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
+                ", id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", status='" + getStatus() + '\'' +
+                ", startTime='" + getStartTime().toEpochMilli() + '\'' +
+                ", endTime='" + getEndTime().toEpochMilli() + '\'' +
+                ", duration='" + getDuration() +
                 '}';
     }
 }

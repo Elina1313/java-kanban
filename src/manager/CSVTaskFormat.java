@@ -7,6 +7,7 @@ import TaskType.TaskType;
 import tasks.TaskStatus;
 
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class CSVTaskFormat {
             return epic;
         } else if (values[1].equals("SUBTASK")) {
             Subtask subtask = new Subtask(values[4], values[2], TaskStatus.valueOf(values[3].toUpperCase()),
-                    Integer.parseInt(values[5]));
+                    Integer.parseInt(values[5]), Instant.ofEpochMilli(60L), 0);
             subtask.setId(Integer.parseInt(values[0]));
             return subtask;
         } else {
@@ -60,6 +61,8 @@ public class CSVTaskFormat {
             return task;
         }
     }
+
+
 
 
     public static String historyToString(HistoryManager manager) {

@@ -1,19 +1,9 @@
-import manager.FileBackedTaskManager;
-import manager.Managers;
-import tasks.TaskStatus;
-import tasks.Epic;
-import tasks.Subtask;
-import tasks.Task;
-
-import java.io.File;
-import java.nio.file.Path;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //Path path = Path.of("data.csv");
-        File file = new File("data.csv");
+        /*File file = new File("data.csv");
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
 
         Task task1 = new Task("Name Task1", "DesTask1", TaskStatus.NEW);
@@ -118,7 +108,7 @@ public class Main {
         manager2.loadFromFile(file);
         System.out.println(manager2.getAllTasks());
         System.out.println(manager2.getAllEpics());
-        System.out.println(manager2.getAllSubtasks());
+        System.out.println(manager2.getAllSubtasks());*/
 
     }
 }

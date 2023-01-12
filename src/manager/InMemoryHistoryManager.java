@@ -7,8 +7,10 @@ import java.util.*;
 public class InMemoryHistoryManager implements HistoryManager {
 
     private static class CustomLinkedList {
-        private final Map<Integer, Node> nodeMap = new HashMap<>();
-        private final Map<Integer, Node> nodeHashMap = new HashMap<>();
+        /*private final Map<Integer, Node> nodeMap = new HashMap<>();
+        private final Map<Integer, Node> nodeHashMap = new HashMap<>();*/
+
+        private final Map<Integer, Node> table = new HashMap<>();
         private Node head;
         private Node tail;
 
@@ -26,8 +28,8 @@ public class InMemoryHistoryManager implements HistoryManager {
             Node element = new Node();
             element.setTask(task);
 
-            if (nodeHashMap.containsKey(task.getId())) {
-                removeNode(nodeHashMap.get(task.getId()));
+            if (table.containsKey(task.getId())) {
+                removeNode(table.get(task.getId()));
             }
 
             if (head == null) {
@@ -42,12 +44,12 @@ public class InMemoryHistoryManager implements HistoryManager {
                 tail = element;
             }
 
-            nodeHashMap.put(task.getId(), element);
+            table.put(task.getId(), element);
         }
 
         private void removeNode(Node node) {
             if (node != null) {
-                nodeHashMap.remove(node.getTask().getId());
+                table.remove(node.getTask().getId());
                 Node prev = node.getPrev();
                 Node next = node.getNext();
 
@@ -70,7 +72,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
 
         private Node getNode(int id) {
-            return nodeHashMap.get(id);
+            return table.get(id);
         }
     }
 
