@@ -270,36 +270,43 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnEmptyListForNoTasks() {
+
         assertTrue(manager.getAllTasks().isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyListForNoEpics() {
+
         assertTrue(manager.getAllEpics().isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyListForNoSubtasks() {
+
         assertTrue(manager.getAllSubtasks().isEmpty());
     }
 
     @Test
     public void shouldReturnNullForNotExistTasks() {
+
         assertNull(manager.getTask(333));
     }
 
     @Test
     public void shouldReturnNullIForNotExistEpics() {
+
         assertNull(manager.getEpic(333));
     }
 
     @Test
     public void shouldReturnNullForNotExistSubtasks() {
+
         assertNull(manager.getSubtask(333));
     }
 
     @Test
     public void shouldReturnEmptyHistory() {
+
         assertEquals(Collections.EMPTY_LIST, manager.getHistory());
     }
 

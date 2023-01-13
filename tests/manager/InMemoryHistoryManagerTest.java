@@ -1,5 +1,6 @@
 package manager;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.*;
@@ -72,7 +73,7 @@ class InMemoryHistoryManagerTest {
         task.setId(newTaskId);
         manager.add(task);
         manager.remove(task.getId());
-        assertEquals(Collections.EMPTY_LIST, manager.getHistory());
+        Assertions.assertTrue(manager.getHistory().isEmpty());
     }
 
     @Test

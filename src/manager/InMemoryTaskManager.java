@@ -15,8 +15,6 @@ public class InMemoryTaskManager implements TaskManager {
     protected Set<Task> prioritizedTasks = new TreeSet<>(taskComparator);
     private static int id = 0;
 
-    /*private HistoryManager historyManager = Managers.getDefaultHistory();*/
-
     public InMemoryTaskManager(HistoryManager historyManager) {
 
         this.historyManager = historyManager;
@@ -370,7 +368,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     private List<Task> getPrioritizedTasks() {
-        return prioritizedTasks.stream().toList();  //
+        return prioritizedTasks.stream().toList();
     }
 
     @Override

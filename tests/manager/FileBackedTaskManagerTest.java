@@ -50,9 +50,9 @@ class FileBackedTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
         FileBackedTaskManager fileManager = new FileBackedTaskManager(Managers.getDefaultHistory(), file);
         fileManager.save();
         fileManager.loadFromFile(file);
-        Assertions.assertEquals(Collections.EMPTY_LIST, manager.getAllTasks());
-        Assertions.assertEquals(Collections.EMPTY_LIST, manager.getAllEpics());
-        Assertions.assertEquals(Collections.EMPTY_LIST, manager.getAllSubtasks());
+        Assertions.assertTrue(manager.getAllTasks().isEmpty());
+        Assertions.assertTrue(manager.getAllEpics().isEmpty());
+        Assertions.assertTrue(manager.getAllSubtasks().isEmpty());
     }
 
     @Test

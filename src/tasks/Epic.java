@@ -39,15 +39,9 @@ public class Epic extends Task {
         return subtasksIds;
     }
 
-    /*public void addIdSubtasks(int id) {
-
-        subtasksIds.add(id);
-    }*/
-
     public void setSubtaskIds(int id) {
         subtasksIds.add(id);
     }
-
 
     public void cleanSubtaskIds() {
 

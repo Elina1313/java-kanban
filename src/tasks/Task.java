@@ -1,7 +1,7 @@
 package tasks;
 
 import java.time.Instant;
-//import java.util.Objects;
+
 import java.util.*;
 
 public class Task {
@@ -34,7 +34,6 @@ public class Task {
         this.startTime = startTime;
         this.duration = duration;
     }
-
 
     public int getId() {
 

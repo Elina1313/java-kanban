@@ -11,8 +11,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import static manager.CSVTaskFormat.*;
-
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private File file;
@@ -166,14 +164,17 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public Task createTask(Task task) {
+
         return super.addNewTask(task);
     }
 
     public Epic createEpic(Epic epic) {
+
         return super.addNewEpic(epic);
     }
 
     public Subtask createSubtask(Subtask subtask) {
+
         return super.addNewSubtask(subtask);
     }
 
@@ -212,12 +213,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         super.deleteAllSubtasks();
         save();
     }
-
-    /*@Override
-    public void deleteAllSubtasksByEpic(Epic epic) {  //удалить?
-        super.deleteAllSubtasksByEpic(epic);
-        save();
-    }*/
 
     @Override
     public Task getTask(int id) {
@@ -265,7 +260,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     static String historyToString(HistoryManager manager) {
-        List<Task> history = manager.getHistory(); // = getHistoryManager().getHistory();
+        List<Task> history = manager.getHistory();
         StringBuilder str = new StringBuilder();
         if (history.isEmpty()) {
             return "";

@@ -11,16 +11,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CSV
- * id, type, name, status, description, epic
- * 1, TASK, Task1, NEW, Description task1,
- * 2, EPIC, Epic2, DONE, Description epic2,
- * 3, SUBTASK, Subtask2, DONE, Description subtask3,2
- * <p>
- * 2,3
- */
-
 public class CSVTaskFormat {
 
     public static TaskType getType(Task task) {
@@ -61,9 +51,6 @@ public class CSVTaskFormat {
             return task;
         }
     }
-
-
-
 
     public static String historyToString(HistoryManager manager) {
         List<Task> history = manager.getHistory();
