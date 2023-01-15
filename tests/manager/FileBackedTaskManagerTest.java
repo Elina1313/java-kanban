@@ -40,7 +40,7 @@ class FileBackedTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
         Epic epic = new Epic("Title", "Description", TaskStatus.NEW, Instant.now(), 0);
         manager.addNewEpic(epic);
         FileBackedTaskManager fileManager = new FileBackedTaskManager(Managers.getDefaultHistory(), file);
-        fileManager.loadFromFile(file);
+        fileManager.loadFromFile();
         Assertions.assertEquals(List.of(task), manager.getAllTasks());
         Assertions.assertEquals(List.of(epic), manager.getAllEpics());
     }
@@ -49,7 +49,7 @@ class FileBackedTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     public void shouldSaveAndLoadEmptyDifferentTasks() {
         FileBackedTaskManager fileManager = new FileBackedTaskManager(Managers.getDefaultHistory(), file);
         fileManager.save();
-        fileManager.loadFromFile(file);
+        fileManager.loadFromFile();
         Assertions.assertTrue(manager.getAllTasks().isEmpty());
         Assertions.assertTrue(manager.getAllEpics().isEmpty());
         Assertions.assertTrue(manager.getAllSubtasks().isEmpty());
@@ -59,7 +59,7 @@ class FileBackedTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     public void shouldSaveAndLoadEmptyHistory() {
         FileBackedTaskManager fileManager = new FileBackedTaskManager(Managers.getDefaultHistory(), file);
         fileManager.save();
-        fileManager.loadFromFile(file);
+        fileManager.loadFromFile();
         Assertions.assertEquals(Collections.EMPTY_LIST, manager.getHistory());
     }
 }

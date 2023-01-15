@@ -6,14 +6,14 @@ import java.util.*;
 import java.time.Instant;
 
 public class InMemoryTaskManager implements TaskManager {
-    private final Map<Integer, Task> tasks = new HashMap<>();
-    private final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private final Map<Integer, Epic> epics = new HashMap<>();
-    private HistoryManager historyManager; /*private final HistoryManager historyManager;*/
+    protected final Map<Integer, Task> tasks = new HashMap<>();
+    protected final Map<Integer, Subtask> subtasks = new HashMap<>();
+    protected final Map<Integer, Epic> epics = new HashMap<>();
+    private final HistoryManager historyManager;
     private final Comparator<Task> taskComparator = Comparator.comparing(Task::getStartTime);
 
     protected Set<Task> prioritizedTasks = new TreeSet<>(taskComparator);
-    private static int id = 0;
+    protected static int id = 0;
 
     public InMemoryTaskManager(HistoryManager historyManager) {
 
@@ -367,7 +367,8 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    private List<Task> getPrioritizedTasks() {
+    @Override
+    public List<Task> getPrioritizedTasks() {
         return prioritizedTasks.stream().toList();
     }
 

@@ -58,4 +58,6 @@ public interface TaskManager {
 
     void printSubtasks();
 
+    List<Task> getPrioritizedTasks();
+
 }
